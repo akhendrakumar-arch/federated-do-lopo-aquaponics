@@ -1,0 +1,16 @@
+﻿held 2: stuck 40.3%  RMSE(1h) all/active  Persistence=3.19/4.13  Linear AR=2.80/3.61  GRU=2.77/3.55  Persistence*=3.19/4.13  Linear AR*=2.80/3.61  GRU*=2.77/3.55 | 31s
+held 3: stuck 0.0%  RMSE(1h) all/active  Persistence=3.33/3.33  Linear AR=2.85/2.85  GRU=3.33/3.33  Persistence*=3.33/3.33  Linear AR*=2.85/2.85  GRU*=3.33/3.33 | 77s
+held 4: stuck 0.0%  RMSE(1h) all/active  Persistence=6.34/6.34  Linear AR=4.86/4.86  GRU=5.05/5.05  Persistence*=6.34/6.34  Linear AR*=4.86/4.86  GRU*=5.05/5.05 | 105s
+held 6: stuck 0.0%  RMSE(1h) all/active  Persistence=6.43/6.43  Linear AR=5.00/5.00  GRU=5.00/5.00  Persistence*=6.43/6.43  Linear AR*=5.00/5.00  GRU*=5.00/5.00 | 142s
+held 9: stuck 0.0%  RMSE(1h) all/active  Persistence=4.75/4.75  Linear AR=4.39/4.39  GRU=4.56/4.56  Persistence*=4.75/4.75  Linear AR*=4.39/4.39  GRU*=4.56/4.56 | 175s
+stuck fraction (mean over ponds): 0.081
+Persistence RMSE all [4.4  4.81 5.55] active [4.56 5.   5.79]
+Linear AR RMSE all [3.53 3.98 4.75] active [3.66 4.14 4.97]
+GRU RMSE all [3.6  4.14 5.36] active [3.73 4.3  5.57]
+alarm base rate [0.101 0.102 0.104]
+Persistence P [0.59 0.49 0.41] R [0.59 0.49 0.4 ] F1 [0.59 0.49 0.4 ]
+Linear AR P [0.72 0.63 0.52] R [0.41 0.29 0.11] F1 [0.53 0.39 0.18]
+GRU P [0.69 0.57 0.37] R [0.28 0.15 0.07] F1 [0.39 0.24 0.12]
+Persistence* P [0.29 0.24 0.2 ] R [0.62 0.52 0.42] F1 [0.39 0.33 0.27]
+Linear AR* P [0.29 0.25 0.21] R [0.52 0.46 0.39] F1 [0.37 0.33 0.28]
+GRU* P [0.2  0.18 0.21] R [0.31 0.28 0.26] F1 [0.25 0.22 0.23]

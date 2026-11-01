@@ -1,0 +1,1183 @@
+included ponds: [1, 2, 3, 4, 6, 9] | threshold 0.05
+  VIOLATION pond 1 vs 2: same timestamp+DO 92.3%, all six variables 73.2%
+  VIOLATION pond 2 vs 1: same timestamp+DO 53.9%, all six variables 42.7%
+GATE: FAIL
+=== audit gate (Pond 1 excluded)
+included ponds: [2, 3, 4, 6, 9] | threshold 0.05
+GATE: PASS
+=== classification (LOPO)
+pond 1: 83126 rows, W/L ratio 2.3519
+pond 2: 172249 rows, W/L ratio 5.5235
+pond 3: 169185 rows, W/L ratio 2.3188
+pond 4: 89844 rows, W/L ratio 3.3825
+pond 6: 91050 rows, W/L ratio 3.6840
+pond 7: 279612 rows, W/L ratio 6.3114
+pond 8: 70744 rows, W/L ratio 5.2413
+pond 9: 151785 rows, W/L ratio 5.7051
+pond labels: {1: 'Worst', 2: 'Good', 3: 'Worst', 4: 'Bad', 6: 'Bad', 7: 'Best', 8: 'Good', 9: 'Best'}
+RF hold-out pond 1: row acc 0.001 vote Good (true Worst)
+RF hold-out pond 2: row acc 0.074 vote Worst (true Good)
+RF hold-out pond 3: row acc 0.029 vote Bad (true Worst)
+RF hold-out pond 4: row acc 0.486 vote Worst (true Bad)
+RF hold-out pond 6: row acc 0.006 vote Good (true Bad)
+RF hold-out pond 7: row acc 0.000 vote Good (true Best)
+RF hold-out pond 8: row acc 0.231 vote Best (true Good)
+RF hold-out pond 9: row acc 0.020 vote Worst (true Best)
+== RF: mean row acc 0.106 +/- 0.161, pond-level 0.00
+DT hold-out pond 1: row acc 0.015 vote Good (true Worst)
+DT hold-out pond 2: row acc 0.073 vote Worst (true Good)
+DT hold-out pond 3: row acc 0.026 vote Bad (true Worst)
+DT hold-out pond 4: row acc 0.184 vote Worst (true Bad)
+DT hold-out pond 6: row acc 0.023 vote Worst (true Bad)
+DT hold-out pond 7: row acc 0.001 vote Good (true Best)
+DT hold-out pond 8: row acc 0.254 vote Best (true Good)
+DT hold-out pond 9: row acc 0.013 vote Worst (true Best)
+== DT: mean row acc 0.074 +/- 0.088, pond-level 0.00
+HGB hold-out pond 1: row acc 0.000 vote Good (true Worst)
+HGB hold-out pond 2: row acc 0.013 vote Worst (true Good)
+HGB hold-out pond 3: row acc 0.036 vote Bad (true Worst)
+HGB hold-out pond 4: row acc 0.347 vote Worst (true Bad)
+HGB hold-out pond 6: row acc 0.003 vote Good (true Bad)
+HGB hold-out pond 7: row acc 0.001 vote Good (true Best)
+HGB hold-out pond 8: row acc 0.305 vote Best (true Good)
+HGB hold-out pond 9: row acc 0.151 vote Worst (true Best)
+== HGB: mean row acc 0.107 +/- 0.135, pond-level 0.00
+=== forecasting (LOPO)
+pond 2: 15177 windows
+pond 3: 13753 windows
+pond 4: 7716 windows
+pond 6: 8153 windows
+pond 9: 12827 windows
+held 2: n=15177 RMSE(15m,1h,3h) Persistence=[2.84, 3.19, 4.13]  GBM=[2.51, 3.19, 4.13]  GRU=[2.32, 2.79, 3.69]  LSTM=[2.38, 2.85, 3.77] | 42s
+held 3: n=13753 RMSE(15m,1h,3h) Persistence=[2.94, 3.33, 3.86]  GBM=[2.55, 4.29, 6.4]  GRU=[2.7, 3.37, 5.89]  LSTM=[2.61, 3.09, 4.52] | 94s
+held 4: n=7716 RMSE(15m,1h,3h) Persistence=[6.26, 6.34, 6.6]  GBM=[4.83, 5.05, 5.58]  GRU=[4.82, 5.06, 5.5]  LSTM=[4.86, 5.05, 5.48] | 131s
+held 6: n=8153 RMSE(15m,1h,3h) Persistence=[6.13, 6.43, 6.9]  GBM=[4.76, 5.04, 5.55]  GRU=[4.73, 5.02, 5.54]  LSTM=[4.78, 5.03, 5.56] | 181s
+held 9: n=12827 RMSE(15m,1h,3h) Persistence=[3.82, 4.75, 6.26]  GBM=[3.59, 5.48, 9.57]  GRU=[3.56, 4.61, 6.46]  LSTM=[3.66, 4.55, 6.11] | 229s
+done 229s; GRU params 18179, latency 0.50 ms
+Persistence RMSE [4.397 4.811 5.549] +/- [2.092 1.943 1.791]
+GBM RMSE [3.651 4.612 6.247] +/- [1.406 1.12  2.519]
+GRU RMSE [3.627 4.17  5.416] +/- [1.42  1.278 1.293]
+LSTM RMSE [3.658 4.115 5.087] +/- [1.446 1.323 1.158]
+skill vs persistence {'GBM': [0.151, -0.004, -0.168], 'GRU': [0.158, 0.113, -0.018], 'LSTM': [0.152, 0.129, 0.061]}
+conformal coverage [0.627 0.604 0.559] min [0.486 0.492 0.305]
+=== conformal recalibration
+held 2: h15: 0.80/0.94/0.88  h60: 0.80/0.93/0.88  h180: 0.79/0.92/0.85 | 33s
+held 3: h15: 0.78/0.90/0.89  h60: 0.77/0.90/0.89  h180: 0.70/0.89/0.85 | 79s
+held 4: h15: 0.50/0.90/0.89  h60: 0.50/0.90/0.89  h180: 0.54/0.92/0.89 | 107s
+held 6: h15: 0.49/0.89/0.91  h60: 0.49/0.89/0.91  h180: 0.50/0.91/0.90 | 148s
+held 9: h15: 0.62/0.93/0.89  h60: 0.48/0.93/0.89  h180: 0.27/0.94/0.87 | 184s
+h15_Source {'cov_mean': 0.639, 'cov_min': 0.491, 'cov_max': 0.802, 'width_mean': 3.389}
+h15_TargetInit {'cov_mean': 0.913, 'cov_min': 0.892, 'cov_max': 0.941, 'width_mean': 11.461}
+h15_Rolling {'cov_mean': 0.894, 'cov_min': 0.882, 'cov_max': 0.906, 'width_mean': 9.308}
+h60_Source {'cov_mean': 0.607, 'cov_min': 0.476, 'cov_max': 0.797, 'width_mean': 4.277}
+h60_TargetInit {'cov_mean': 0.911, 'cov_min': 0.892, 'cov_max': 0.933, 'width_mean': 12.885}
+h60_Rolling {'cov_mean': 0.891, 'cov_min': 0.881, 'cov_max': 0.907, 'width_mean': 11.056}
+h180_Source {'cov_mean': 0.559, 'cov_min': 0.266, 'cov_max': 0.789, 'width_mean': 5.512}
+h180_TargetInit {'cov_mean': 0.916, 'cov_min': 0.889, 'cov_max': 0.941, 'width_mean': 17.557}
+h180_Rolling {'cov_mean': 0.872, 'cov_min': 0.849, 'cov_max': 0.896, 'width_mean': 14.837}
+=== example trace + dataset summary
+{1: (83126, None), 2: (172249, 15177), 3: (169185, 13753), 4: (89844, 7716), 6: (91050, 8153), 7: (279612, None), 8: (70744, None), 9: (151785, 12827)}
+candidates 61 typical 12 chosen std 3.38
+example 432 2021-07-02 21:10 2021-07-04 09:05 q 4.84 seg RMSE gru/pers 2.43 3.04
+=== baselines
+held 2: Linear AR=[2.31, 2.8, 3.83]  Ridge=[2.32, 2.81, 3.83]  Random forest=[2.54, 3.3, 4.24]  TCN=[2.42, 2.83, 3.73]  CNN-GRU=[2.36, 2.84, 3.73]  Transformer=[2.39, 2.84, 3.71] | 144s
+held 3: Linear AR=[2.43, 2.85, 3.36]  Ridge=[2.5, 2.92, 3.54]  Random forest=[2.86, 4.68, 6.35]  TCN=[2.69, 3.23, 4.97]  CNN-GRU=[2.53, 2.99, 3.67]  Transformer=[2.73, 3.39, 4.8] | 330s
+held 4: Linear AR=[4.72, 4.86, 5.2]  Ridge=[4.72, 4.86, 5.19]  Random forest=[4.81, 5.07, 5.52]  TCN=[4.89, 5.06, 5.45]  CNN-GRU=[4.89, 5.05, 5.43]  Transformer=[4.9, 5.15, 5.43] | 484s
+held 6: Linear AR=[4.72, 5.0, 5.5]  Ridge=[4.72, 5.0, 5.51]  Random forest=[4.75, 5.0, 5.51]  TCN=[4.87, 5.12, 5.59]  CNN-GRU=[4.7, 4.99, 5.48]  Transformer=[4.72, 4.94, 5.5] | 677s
+held 9: Linear AR=[3.45, 4.39, 5.88]  Ridge=[3.47, 4.42, 5.99]  Random forest=[3.64, 5.39, 9.71]  TCN=[3.57, 4.52, 6.02]  CNN-GRU=[3.47, 4.43, 5.92]  Transformer=[3.42, 4.44, 6.21] | 941s
+Linear AR RMSE [3.525 3.98  4.755] +/- [1.459 1.339 1.364]
+Ridge RMSE [3.545 4.    4.814] +/- [1.44  1.318 1.331]
+Random forest RMSE [3.72  4.688 6.266] +/- [1.3   1.015 2.567]
+TCN RMSE [3.688 4.152 5.152] +/- [1.45  1.314 1.091]
+CNN-GRU RMSE [3.589 4.06  4.847] +/- [1.467 1.333 1.319]
+Transformer RMSE [3.632 4.152 5.131] +/- [1.415 1.242 1.162]
+=== federated GRU study
+held 2: n=12853 RMSE Persistence=[2.62, 3.01, 3.93]  Local=[4.25, 5.58, 7.05]  Centralised=[2.22, 2.78, 3.68]  FedAvg=[2.39, 2.91, 3.89]  FedProx=[2.55, 3.07, 4.02]  FedAvg+FT=[2.37, 2.84, 3.78] | 174s
+held 3: n=11643 RMSE Persistence=[2.89, 3.3, 3.74]  Local=[3.01, 4.89, 6.83]  Centralised=[2.46, 2.9, 3.6]  FedAvg=[2.61, 3.26, 4.43]  FedProx=[2.51, 3.03, 3.74]  FedAvg+FT=[2.49, 2.89, 3.34] | 360s
+held 4: n=6511 RMSE Persistence=[6.12, 6.23, 6.41]  Local=[4.97, 5.52, 6.53]  Centralised=[4.71, 4.94, 5.38]  FedAvg=[4.87, 5.08, 5.54]  FedProx=[5.0, 5.17, 5.53]  FedAvg+FT=[4.78, 4.97, 5.24] | 555s
+held 6: n=6883 RMSE Persistence=[6.07, 6.35, 6.77]  Local=[4.85, 5.32, 6.05]  Centralised=[4.63, 4.87, 5.36]  FedAvg=[4.62, 4.86, 5.29]  FedProx=[4.71, 4.93, 5.35]  FedAvg+FT=[4.64, 4.84, 5.24] | 767s
+held 9: n=10855 RMSE Persistence=[4.18, 5.04, 6.22]  Local=[5.81, 6.88, 9.03]  Centralised=[3.91, 4.78, 6.02]  FedAvg=[4.19, 5.09, 6.27]  FedProx=[4.47, 5.2, 6.49]  FedAvg+FT=[4.09, 5.03, 6.62] | 942s
+Persistence RMSE [4.377 4.785 5.414] +/- [2.083 1.957 1.809]
+Local RMSE [4.576 5.639 7.1  ] +/- [1.289 0.924 1.42 ]
+Centralised RMSE [3.585 4.053 4.808] +/- [1.469 1.377 1.361]
+FedAvg RMSE [3.734 4.24  5.083] +/- [1.439 1.324 1.164]
+FedProx RMSE [3.848 4.282 5.024] +/- [1.512 1.4   1.412]
+FedAvg+FT RMSE [3.676 4.114 4.844] +/- [1.446 1.415 1.628]
+communication: 11.6 MB total, 145.4 KB per client-round
+=== federated linear (exact)
+2 RMSE [2.08 2.65 3.76] pers [2.5  2.92 3.93] max|fed-pooled| 3.51e-14
+3 RMSE [2.4  2.83 3.26] pers [2.89 3.3  3.75] max|fed-pooled| 6.04e-14
+4 RMSE [4.63 4.82 5.11] pers [6.15 6.25 6.43] max|fed-pooled| 8.15e-14
+6 RMSE [4.67 4.93 5.43] pers [6.08 6.36 6.78] max|fed-pooled| 6.35e-14
+9 RMSE [3.39 4.37 5.74] pers [3.68 4.68 6.06] max|fed-pooled| 4.49e-14
+mean RMSE [3.435 3.921 4.66 ] +/- [1.502 1.364 1.351] | bytes/client 832 | max diff 8.149037000748649e-14
+=== robustness + alarms
+held 2: stuck 40.3%  RMSE(1h) all/active  Persistence=3.19/4.13  Linear AR=2.80/3.61  GRU=2.77/3.55  Persistence*=3.19/4.13  Linear AR*=2.80/3.61  GRU*=2.77/3.55 | 32s
+held 3: stuck 0.0%  RMSE(1h) all/active  Persistence=3.33/3.33  Linear AR=2.85/2.85  GRU=3.33/3.33  Persistence*=3.33/3.33  Linear AR*=2.85/2.85  GRU*=3.33/3.33 | 80s
+held 4: stuck 0.0%  RMSE(1h) all/active  Persistence=6.34/6.34  Linear AR=4.86/4.86  GRU=5.05/5.05  Persistence*=6.34/6.34  Linear AR*=4.86/4.86  GRU*=5.05/5.05 | 109s
+held 6: stuck 0.0%  RMSE(1h) all/active  Persistence=6.43/6.43  Linear AR=5.00/5.00  GRU=5.00/5.00  Persistence*=6.43/6.43  Linear AR*=5.00/5.00  GRU*=5.00/5.00 | 150s
+held 9: stuck 0.0%  RMSE(1h) all/active  Persistence=4.75/4.75  Linear AR=4.39/4.39  GRU=4.56/4.56  Persistence*=4.75/4.75  Linear AR*=4.39/4.39  GRU*=4.56/4.56 | 186s
+stuck fraction (mean over ponds): 0.081
+Persistence RMSE all [4.4  4.81 5.55] active [4.56 5.   5.79]
+Linear AR RMSE all [3.53 3.98 4.75] active [3.66 4.14 4.97]
+GRU RMSE all [3.6  4.14 5.36] active [3.73 4.3  5.57]
+alarm base rate [0.101 0.102 0.104]
+Persistence P [0.59 0.49 0.41] R [0.59 0.49 0.4 ] F1 [0.59 0.49 0.4 ]
+Linear AR P [0.72 0.63 0.52] R [0.41 0.29 0.11] F1 [0.53 0.39 0.18]
+GRU P [0.69 0.57 0.37] R [0.28 0.15 0.07] F1 [0.39 0.24 0.12]
+Persistence* P [0.29 0.24 0.2 ] R [0.62 0.52 0.42] F1 [0.39 0.33 0.27]
+Linear AR* P [0.29 0.25 0.21] R [0.52 0.46 0.39] F1 [0.37 0.33 0.28]
+GRU* P [0.2  0.18 0.21] R [0.31 0.28 0.26] F1 [0.25 0.22 0.23]
+=== generate tables and figures
+generated: ['fig_cov.tex', 'fig_example.tex', 'fig_fc.tex', 'fig_fed.tex', 'fig_recal.tex', 'fig_rel.tex', 'fig_skill.tex', 'macros.tex', 'tab_alarm.tex', 'tab_audit.tex', 'tab_cls.tex', 'tab_cost.tex', 'tab_cov.tex', 'tab_data.tex', 'tab_fc.tex', 'tab_fed.tex', 'tab_fedpond.tex', 'tab_heat.tex', 'tab_pond.tex', 'tab_r2.tex', 'tab_recal.tex', 'tab_robust.tex']
+best overall per horizon: {0: 'Linear AR', 1: 'Linear AR', 2: 'Linear AR'} | best neural: {0: 'CNN-GRU', 1: 'CNN-GRU', 2: 'CNN-GRU'}
+RMSE means: {'Persistence': [4.4, 4.81, 5.55], 'Linear AR': [3.53, 3.98, 4.75], 'Ridge': [3.55, 4.0, 4.81], 'Random forest': [3.72, 4.69, 6.27], 'GBM': [3.65, 4.61, 6.25], 'TCN': [3.69, 4.15, 5.15], 'CNN-GRU': [3.59, 4.06, 4.85], 'Transformer': [3.63, 4.15, 5.13], 'LSTM': [3.66, 4.11, 5.09], 'GRU': [3.63, 4.17, 5.42]}
+robust/alarm generated
+audit table generated
+=== LaTeX pass 1
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Program Files\MiKTeX\tex/latex/ieeetran\IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+(C:\Program Files\MiKTeX\tex/latex/psnfss\ot1ptm.fd)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+-- This is a 10 point document.
+)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.s
+ty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.st
+y (C:\Program Files\MiKTeX\tex/latex/psnfss\t1ptm.fd))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath
+.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext
+.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.
+sty))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.
+sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.
+sty))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssym
+b.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfon
+ts.sty)) (C:\Program Files\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Program Files\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.s
+ty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\co
+lor.cfg)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pd
+ftex.def)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathco
+lor.ltx)) (C:\Program Files\MiKTeX\tex/latex/colortbl\colortbl.sty)
+(C:\Program Files\MiKTeX\tex/latex/cite\cite.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperr
+ef.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.s
+ty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval
+.sty) (C:\Program Files\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(C:\Program Files\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty)
+(C:\Program Files\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(C:\Program Files\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pd
+ftexcmds.sty (C:\Program Files\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Program Files\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namere
+f.sty (C:\Program Files\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Program Files\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+(C:\Program Files\MiKTeX\tex/latex/kvoptions\kvoptions.sty)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolb
+ox.sty) (C:\Program Files\MiKTeX\tex/generic/stringenc\stringenc.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc
+.def) (C:\Program Files\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.
+def) (C:\Program Files\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Program Files\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdfte
+x.def (C:\Program Files\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+(C:\Program Files\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlay
+er\tikz.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\
+pgf.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gfrcs.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfutil-common.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfutil-latex.def)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfrcs.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revis
+ion.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\
+pgfcore.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cx.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cs.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.s
+ty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\gr
+aphics.cfg)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer
+\pgfsys.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeys.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeyslibraryfiltered.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgf.cfg)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys-pdftex.def
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys-common-pdf.def)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsyssoftpath.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsysprotocol.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcore.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+ath.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athutil.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athparser.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.basic.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.trigonometric.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.random.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.comparison.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.base.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.round.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.misc.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.integerarithmetics.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athcalc.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfloat.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfi
+nt.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepoints.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathconstruct.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathusage.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorescopes.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoregraphicstate.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoretransformations.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorequick.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreobjects.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathprocessing.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorearrows.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreshade.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreimage.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreexternal.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorelayers.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoretransparency.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepatterns.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorerdf.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduleshapes.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduleplot.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibili
+ty\pgfcomp-version-0-65.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibili
+ty\pgfcomp-version-1-18.sty))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gffor.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gfkeys.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeys.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmat
+h.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+ath.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgffor.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz\tikz.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryplothandlers.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmodulematrix.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarytopaths.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryarrows.meta.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarypositioning.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/shapes\pgflibraryshapes.geometric.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarycalc.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryfit.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarybackgrounds.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgfplots\pgfplo
+ts.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.revision.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotscore.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\
+pgfplotssysgeneric.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\pgfplotslibrary.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldp
+gfcompatib\pgfplotsoldpgfsupp_loader.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldp
+gfcompatib\pgfplotsoldpgfsupp_pgfutil-common-lists.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsutil.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsliststructure.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsliststructureext.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsarray.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsmatrix.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/numt
+able\pgfplotstableshared.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsdeque.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsbinary.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsbinary.data.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsutil.verb.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\pgflibrarypgfplots.surfshading.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\
+pgflibrarypgfplots.surfshading.pgfsys-pdftex.def)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotscolormap.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotscolor.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsstackedplots.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsplothandlers.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsmeshplothandler.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsmeshplotimage.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.scaling.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotscoordprocessing.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.errorbars.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.markers.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsticks.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.paths.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarydecorations.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduledecorations.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarydecorations.pathmorphing.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/decorations\pgflibrarydecorations.pathmorphing.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarydecorations.pathreplacing.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/decorations\pgflibrarydecorations.pathreplacing.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\tikzlibrarypgfplots.contourlua.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryplotmarks.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryplotmarks.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\tikzlibrarypgfplots.fillbetween.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfc
+ontrib\tikzlibraryfillbetween.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryintersections.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryintersections.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfc
+ontrib\tikzlibrarydecorations.softclip.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfc
+ontrib\pgflibraryfillbetween.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\tikzlibrarypgfplots.decorations.softclip.code.tex)) (generated/macros.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3bac
+kend-pdftex.def)
+No file main.aux.
+-- Lines per column: 58 (exact).
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\sup
+p-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\ep
+stopdf-base.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstop
+df-sys.cfg))
+Package pgfplots notification 'compat/show suggested version=true': you might b
+enefit from \pgfplotsset{compat=1.18} (current compat level: 1.17).
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 35--37
+[]\T1/ptm/b/it/9 Abstract\T1/ptm/b/n/9 ---Short-horizon dissolved-oxygen (DO) f
+ore-cast-ing
+
+LaTeX Warning: Citation `udanor2022dataset' on page 1 undefined on input line 4
+4.
+
+
+LaTeX Warning: Citation `gladju2022review' on page 1 undefined on input line 44
+.
+
+
+LaTeX Warning: Citation `flores2025iot' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `liu2023hybrid' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `khan2023optimized' on page 1 undefined on input line 4
+4.
+
+
+LaTeX Warning: Citation `haq2022hybrid' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `ma2024gru' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `sundararajan2025multiscale' on page 1 undefined on inp
+ut line 44.
+
+
+LaTeX Warning: Citation `yu2026do' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `roberts2017cv' on page 1 undefined on input line 46.
+
+
+LaTeX Warning: Citation `mcmahan2017fedavg' on page 1 undefined on input line 4
+6.
+
+
+LaTeX Warning: Citation `udanor2022dataset' on page 1 undefined on input line 4
+8.
+
+
+LaTeX Warning: Citation `mcmahan2017fedavg' on page 1 undefined on input line 5
+3.
+
+
+LaTeX Warning: Citation `li2020fedprox' on page 1 undefined on input line 53.
+
+
+LaTeX Warning: Citation `angelopoulos2021conformal' on page 1 undefined on inpu
+t line 54.
+
+
+LaTeX Warning: Reference `fig:system' on page 1 undefined on input line 56.
+
+
+LaTeX Warning: Reference `sec:limits' on page 1 undefined on input line 56.
+
+
+Overfull \hbox (18.14656pt too wide) in paragraph at lines 89--90
+ [][] 
+
+LaTeX Warning: Citation `gladju2022review' on page 1 undefined on input line 96
+.
+
+
+LaTeX Warning: Citation `flores2025iot' on page 1 undefined on input line 96.
+
+
+LaTeX Warning: Citation `eneh2023quality' on page 1 undefined on input line 96.
+
+
+
+LaTeX Warning: Citation `khandakar2024smart' on page 1 undefined on input line 
+96.
+
+
+LaTeX Warning: Citation `liu2023hybrid' on page 1 undefined on input line 96.
+
+
+LaTeX Warning: Citation `haq2022hybrid' on page 1 undefined on input line 96.
+
+
+LaTeX Warning: Citation `ma2024gru' on page 1 undefined on input line 96.
+
+
+LaTeX Warning: Citation `sundararajan2025multiscale' on page 1 undefined on inp
+ut line 96.
+
+
+LaTeX Warning: Citation `khan2023optimized' on page 1 undefined on input line 9
+6.
+
+
+LaTeX Warning: Citation `saleh2026tcn' on page 1 undefined on input line 96.
+
+
+LaTeX Warning: Citation `alanis2026cross' on page 1 undefined on input line 96.
+
+
+
+LaTeX Warning: Citation `yu2026do' on page 1 undefined on input line 96.
+
+
+LaTeX Warning: Citation `mcmahan2017fedavg' on page 1 undefined on input line 9
+9.
+
+
+LaTeX Warning: Citation `li2020fedprox' on page 1 undefined on input line 99.
+
+
+LaTeX Warning: Citation `angelopoulos2021conformal' on page 1 undefined on inpu
+t line 99.
+
+[1{C:/Users/akhendrakumar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/
+Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+
+
+LaTeX Warning: Citation `udanor2022dataset' on page 2 undefined on input line 1
+03.
+
+
+LaTeX Warning: Reference `tab:data' on page 2 undefined on input line 103.
+
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.f
+d)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.f
+d) (generated/tab_data.tex)
+
+LaTeX Warning: Reference `tab:audit' on page 2 undefined on input line 113.
+
+
+LaTeX Warning: Reference `sec:repro' on page 2 undefined on input line 113.
+
+(generated/tab_audit.tex)
+
+LaTeX Warning: Reference `sec:robust' on page 2 undefined on input line 121.
+
+
+LaTeX Warning: Reference `fig:lopo' on page 2 undefined on input line 148.
+
+
+LaTeX Warning: Reference `tab:setup' on page 2 undefined on input line 148.
+
+[2]
+
+LaTeX Warning: Reference `tab:setup' on page 3 undefined on input line 186.
+
+
+LaTeX Warning: Citation `mcmahan2017fedavg' on page 3 undefined on input line 1
+89.
+
+
+LaTeX Warning: Citation `li2020fedprox' on page 3 undefined on input line 189.
+
+[3] (generated/tab_cls.tex)
+
+LaTeX Warning: Reference `tab:cls' on page 4 undefined on input line 203.
+
+(generated/tab_fc.tex) (generated/fig_rel.tex)
+
+LaTeX Warning: Reference `tab:fc' on page 4 undefined on input line 219.
+
+
+LaTeX Warning: Reference `fig:rel' on page 4 undefined on input line 219.
+
+
+LaTeX Warning: Reference `tab:pond' on page 4 undefined on input line 219.
+
+
+LaTeX Warning: Reference `tab:fc' on page 4 undefined on input line 219.
+
+
+LaTeX Warning: Reference `tab:heat' on page 4 undefined on input line 219.
+
+
+LaTeX Warning: Reference `tab:r2' on page 4 undefined on input line 219.
+
+(generated/tab_pond.tex) (generated/tab_heat.tex) (generated/tab_r2.tex)
+(generated/fig_example.tex)
+
+LaTeX Warning: Reference `fig:example' on page 4 undefined on input line 250.
+
+(generated/tab_robust.tex) (generated/tab_alarm.tex)
+
+LaTeX Warning: Reference `tab:robust' on page 4 undefined on input line 267.
+
+
+LaTeX Warning: Reference `tab:alarm' on page 4 undefined on input line 269.
+
+[4] (generated/tab_fed.tex) (generated/fig_fed.tex)
+
+LaTeX Warning: Reference `tab:fed' on page 5 undefined on input line 284.
+
+
+LaTeX Warning: Reference `fig:fed' on page 5 undefined on input line 284.
+
+
+LaTeX Warning: Reference `tab:fedpond' on page 5 undefined on input line 284.
+
+
+LaTeX Warning: Reference `tab:fc' on page 5 undefined on input line 284.
+
+(generated/tab_fedpond.tex) [5] (generated/tab_cov.tex)
+
+LaTeX Warning: Reference `tab:cov' on page 6 undefined on input line 303.
+
+(generated/tab_recal.tex)
+Overfull \hbox (5.73322pt too wide) in paragraph at lines 1--307
+ [][] 
+(generated/fig_cov.tex)
+
+LaTeX Warning: Reference `tab:cov' on page 6 undefined on input line 314.
+
+
+LaTeX Warning: Reference `tab:recal' on page 6 undefined on input line 314.
+
+
+LaTeX Warning: Reference `fig:cov' on page 6 undefined on input line 314.
+
+(generated/tab_cost.tex)
+
+LaTeX Warning: Reference `tab:cost' on page 6 undefined on input line 324.
+
+[6]
+
+LaTeX Warning: Reference `tab:robust' on page 7 undefined on input line 327.
+
+
+LaTeX Warning: Citation `liu2023hybrid' on page 7 undefined on input line 329.
+
+
+LaTeX Warning: Citation `khan2023optimized' on page 7 undefined on input line 3
+29.
+
+
+LaTeX Warning: Citation `haq2022hybrid' on page 7 undefined on input line 329.
+
+
+LaTeX Warning: Citation `ma2024gru' on page 7 undefined on input line 329.
+
+
+LaTeX Warning: Citation `sundararajan2025multiscale' on page 7 undefined on inp
+ut line 329.
+
+
+LaTeX Warning: Citation `udanor2022dataset' on page 7 undefined on input line 3
+35.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+[]\T1/ptm/m/n/10 The Nsukka data set is pub-lic [\T1/ptm/b/n/10 ?\T1/ptm/m/n/10
+ ] (Kag-
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+\T1/ptm/m/n/10 gle, []$kaggle . com / datasets / ogbuokiriblessing /
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+\T1/ptm/m/n/10 sensor-[]based-[]aquaponics-[]^^\sh-[]pond-[]datasets$[]). All c
+ode,
+
+Underfull \hbox (badness 4048) in paragraph at lines 355--356
+\T1/ptm/m/it/8 Elec-tri-cal En-gi-neer-ing\T1/ptm/m/n/8 , vol. 119, Art. no. 10
+9590, 2024, doi:
+[7] [8] (main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)<C:/Users/akhendrakumar/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/
+akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
+7.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmmi8.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/akhendrakumar/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/akhendrakumar/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/a
+khendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.
+pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/akhendrakumar/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/akhendrakumar/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/
+akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
+:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi
+8a.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/urw/ti
+mes/utmr8a.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type
+1/urw/times/utmri8a.pfb>
+Output written on main.pdf (8 pages, 251265 bytes).
+Transcript written on main.log.
+pdflatex: major issue: So far, you have not checked for updates as a MiKTeX user.
+=== LaTeX pass 2
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Program Files\MiKTeX\tex/latex/ieeetran\IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+(C:\Program Files\MiKTeX\tex/latex/psnfss\ot1ptm.fd)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+-- This is a 10 point document.
+)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.s
+ty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.st
+y (C:\Program Files\MiKTeX\tex/latex/psnfss\t1ptm.fd))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath
+.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext
+.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.
+sty))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.
+sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.
+sty))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssym
+b.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfon
+ts.sty)) (C:\Program Files\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Program Files\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.s
+ty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\co
+lor.cfg)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pd
+ftex.def)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathco
+lor.ltx)) (C:\Program Files\MiKTeX\tex/latex/colortbl\colortbl.sty)
+(C:\Program Files\MiKTeX\tex/latex/cite\cite.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperr
+ef.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.s
+ty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval
+.sty) (C:\Program Files\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(C:\Program Files\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty)
+(C:\Program Files\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(C:\Program Files\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pd
+ftexcmds.sty (C:\Program Files\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Program Files\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namere
+f.sty (C:\Program Files\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Program Files\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+(C:\Program Files\MiKTeX\tex/latex/kvoptions\kvoptions.sty)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolb
+ox.sty) (C:\Program Files\MiKTeX\tex/generic/stringenc\stringenc.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc
+.def) (C:\Program Files\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.
+def) (C:\Program Files\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Program Files\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdfte
+x.def (C:\Program Files\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+(C:\Program Files\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlay
+er\tikz.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\
+pgf.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gfrcs.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfutil-common.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfutil-latex.def)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfrcs.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revis
+ion.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\
+pgfcore.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cx.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cs.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.s
+ty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\gr
+aphics.cfg)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer
+\pgfsys.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeys.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeyslibraryfiltered.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgf.cfg)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys-pdftex.def
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsys-common-pdf.def)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsyssoftpath.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlay
+er\pgfsysprotocol.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcore.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+ath.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athutil.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athparser.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.basic.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.trigonometric.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.random.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.comparison.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.base.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.round.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.misc.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfunctions.integerarithmetics.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athcalc.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+athfloat.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfi
+nt.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepoints.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathconstruct.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathusage.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorescopes.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoregraphicstate.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoretransformations.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorequick.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreobjects.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepathprocessing.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorearrows.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreshade.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreimage.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoreexternal.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorelayers.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcoretransparency.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorepatterns.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclaye
+r\pgfcorerdf.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduleshapes.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduleplot.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibili
+ty\pgfcomp-version-0-65.sty)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibili
+ty\pgfcomp-version-1-18.sty))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gffor.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\p
+gfkeys.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgfkeys.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmat
+h.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfm
+ath.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities
+\pgffor.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz\tikz.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryplothandlers.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmodulematrix.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarytopaths.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryarrows.meta.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarypositioning.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/shapes\pgflibraryshapes.geometric.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarycalc.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryfit.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarybackgrounds.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/pgfplots\pgfplo
+ts.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.revision.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotscore.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\
+pgfplotssysgeneric.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\pgfplotslibrary.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldp
+gfcompatib\pgfplotsoldpgfsupp_loader.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldp
+gfcompatib\pgfplotsoldpgfsupp_pgfutil-common-lists.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsutil.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsliststructure.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsliststructureext.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsarray.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsmatrix.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/numt
+able\pgfplotstableshared.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/list
+structure\pgfplotsdeque.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsbinary.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsbinary.data.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotsutil.verb.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\pgflibrarypgfplots.surfshading.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\
+pgflibrarypgfplots.surfshading.pgfsys-pdftex.def)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotscolormap.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util
+\pgfplotscolor.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsstackedplots.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsplothandlers.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsmeshplothandler.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsmeshplotimage.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.scaling.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotscoordprocessing.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.errorbars.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.markers.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lotsticks.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfp
+lots.paths.code.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarydecorations.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\p
+gfmoduledecorations.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarydecorations.pathmorphing.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/decorations\pgflibrarydecorations.pathmorphing.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibrarydecorations.pathreplacing.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+/decorations\pgflibrarydecorations.pathreplacing.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\tikzlibrarypgfplots.contourlua.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryplotmarks.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryplotmarks.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\tikzlibrarypgfplots.fillbetween.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfc
+ontrib\tikzlibraryfillbetween.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendl
+ayer/tikz/libraries\tikzlibraryintersections.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries
+\pgflibraryintersections.code.tex))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfc
+ontrib\tikzlibrarydecorations.softclip.code.tex
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfc
+ontrib\pgflibraryfillbetween.code.tex)))
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs
+\tikzlibrarypgfplots.decorations.softclip.code.tex)) (generated/macros.tex)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3bac
+kend-pdftex.def) (main.aux)
+-- Lines per column: 58 (exact).
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\sup
+p-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\ep
+stopdf-base.sty
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstop
+df-sys.cfg)) (main.out) (main.out)
+Package pgfplots notification 'compat/show suggested version=true': you might b
+enefit from \pgfplotsset{compat=1.18} (current compat level: 1.17).
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 35--37
+[]\T1/ptm/b/it/9 Abstract\T1/ptm/b/n/9 ---Short-horizon dissolved-oxygen (DO) f
+ore-cast-ing
+
+Overfull \hbox (18.14656pt too wide) in paragraph at lines 89--90
+ [][] 
+[1{C:/Users/akhendrakumar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/
+Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.f
+d)
+(C:\Users\akhendrakumar\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.f
+d) (generated/tab_data.tex) (generated/tab_audit.tex) [2] [3]
+(generated/tab_cls.tex) (generated/tab_fc.tex) (generated/fig_rel.tex)
+(generated/tab_pond.tex) (generated/tab_heat.tex) (generated/tab_r2.tex)
+(generated/fig_example.tex) (generated/tab_robust.tex) (generated/tab_alarm.tex
+) [4] (generated/tab_fed.tex) (generated/fig_fed.tex)
+(generated/tab_fedpond.tex) [5] (generated/tab_cov.tex)
+(generated/tab_recal.tex)
+Overfull \hbox (5.73322pt too wide) in paragraph at lines 1--307
+ [][] 
+(generated/fig_cov.tex) (generated/tab_cost.tex) [6]
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+[]\T1/ptm/m/n/10 The Nsukka data set is pub-lic [[]1[]] (Kag-
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+\T1/ptm/m/n/10 gle, []$kaggle . com / datasets / ogbuokiriblessing /
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+\T1/ptm/m/n/10 sensor-[]based-[]aquaponics-[]^^\sh-[]pond-[]datasets$[]). All c
+ode,
+
+Underfull \hbox (badness 4048) in paragraph at lines 355--356
+\T1/ptm/m/it/8 Elec-tri-cal En-gi-neer-ing\T1/ptm/m/n/8 , vol. 119, Art. no. 10
+9590, 2024, doi:
+[7] [8] (main.aux) )
+(see the transcript file for additional information)<C:/Users/akhendrakumar/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/
+akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
+7.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmmi8.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/akhendrakumar/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/akhendrakumar/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/a
+khendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.
+pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/akhendrakumar/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/akhendrakumar/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/
+akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C
+:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi
+8a.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type1/urw/ti
+mes/utmr8a.pfb><C:/Users/akhendrakumar/AppData/Local/Programs/MiKTeX/fonts/type
+1/urw/times/utmri8a.pfb>
+Output written on main.pdf (8 pages, 270081 bytes).
+Transcript written on main.log.
+pdflatex: major issue: So far, you have not checked for updates as a MiKTeX user.
+done: C:\Users\akhendrakumar\Desktop\VV\raspberrypi\journal_paper\manuscript_v2\main.pdf
+RUNALL_OK  

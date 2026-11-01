@@ -1,0 +1,14 @@
+held 2: h15: 0.80/0.94/0.88  h60: 0.80/0.93/0.88  h180: 0.79/0.92/0.85 | 33s
+held 3: h15: 0.78/0.90/0.89  h60: 0.77/0.90/0.89  h180: 0.70/0.89/0.85 | 79s
+held 4: h15: 0.50/0.90/0.89  h60: 0.50/0.90/0.89  h180: 0.54/0.92/0.89 | 108s
+held 6: h15: 0.49/0.89/0.91  h60: 0.49/0.89/0.91  h180: 0.50/0.91/0.90 | 147s
+held 9: h15: 0.62/0.93/0.89  h60: 0.48/0.93/0.89  h180: 0.27/0.94/0.87 | 181s
+h15_Source {'cov_mean': 0.639, 'cov_min': 0.491, 'cov_max': 0.802, 'width_mean': 3.389}
+h15_TargetInit {'cov_mean': 0.913, 'cov_min': 0.892, 'cov_max': 0.941, 'width_mean': 11.461}
+h15_Rolling {'cov_mean': 0.894, 'cov_min': 0.882, 'cov_max': 0.906, 'width_mean': 9.308}
+h60_Source {'cov_mean': 0.607, 'cov_min': 0.476, 'cov_max': 0.797, 'width_mean': 4.277}
+h60_TargetInit {'cov_mean': 0.911, 'cov_min': 0.892, 'cov_max': 0.933, 'width_mean': 12.885}
+h60_Rolling {'cov_mean': 0.891, 'cov_min': 0.881, 'cov_max': 0.907, 'width_mean': 11.056}
+h180_Source {'cov_mean': 0.559, 'cov_min': 0.266, 'cov_max': 0.789, 'width_mean': 5.512}
+h180_TargetInit {'cov_mean': 0.916, 'cov_min': 0.889, 'cov_max': 0.941, 'width_mean': 17.557}
+h180_Rolling {'cov_mean': 0.872, 'cov_min': 0.849, 'cov_max': 0.896, 'width_mean': 14.837}

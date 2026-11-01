@@ -1,0 +1,40 @@
+﻿[esp4] fold 0 train done: 6930 windows, 2204 ms, W[0]=0.0333
+[esp5] fold 0 train done: 10902 windows, 2453 ms, W[0]=0.0333[esp3] fold 0 train done: 6558 windows, 2084 ms, W[0]=0.0333[esp2] fold 0 train done: 11690 windows, 2580 ms, W[0]=0.0333
+
+
+[esp1] fold 0 test done: 15177 windows, 1284 ms, RMSE [2.313, 2.802, 3.825]
+[esp1] fold 1 train done: 12900 windows, 3571 ms, W[0]=0.0338
+[esp5] fold 1 train done: 10902 windows, 3454 ms, W[0]=0.0338
+[esp3] fold 1 train done: 6558 windows, 2917 ms, W[0]=0.0338
+[esp4] fold 1 train done: 6930 windows, 2952 ms, W[0]=0.0338
+[esp2] fold 1 test done: 13753 windows, 987 ms, RMSE [2.429, 2.849, 3.364]
+[esp4] fold 2 train done: 6930 windows, 2590 ms, W[0]=0.0232
+[esp2] fold 2 train done: 11690 windows, 3143 ms, W[0]=0.0232[esp1] fold 2 train done: 12900 windows, 3386 ms, W[0]=0.0232
+
+[esp5] fold 2 train done: 10902 windows, 3191 ms, W[0]=0.0232
+[esp3] fold 2 test done: 7716 windows, 550 ms, RMSE [4.721, 4.865, 5.195]
+[esp1] fold 3 train done: 12900 windows, 3395 ms, W[0]=0.0363
+[esp2] fold 3 train done: 11690 windows, 3158 ms, W[0]=0.0363
+[esp3] fold 3 train done: 6558 windows, 2465 ms, W[0]=0.0363
+[esp5] fold 3 train done: 10902 windows, 3159 ms, W[0]=0.0363
+[esp4] fold 3 test done: 8153 windows, 714 ms, RMSE [4.716, 4.997, 5.504]
+[esp2] fold 4 train done: 11690 windows, 3256 ms, W[0]=0.0423
+[esp4] fold 4 train done: 6930 windows, 2682 ms, W[0]=0.0423[esp3] fold 4 train done: 6558 windows, 2716 ms, W[0]=0.0423
+
+[esp1] fold 4 train done: 12900 windows, 3390 ms, W[0]=0.0423
+[esp4] all folds finished
+[esp1] all folds finished
+[esp2] all folds finished
+[esp3] all folds finished
+all folds done ->  C:\Users\akhendrakumar\Desktop\VV\raspberrypi\journal_paper\hardware\hardware_results.json
+[esp5] fold 4 test done: 12827 windows, 1405 ms, RMSE [3.446, 4.386, 5.883]
+[esp5] all folds finished
+emulation finished in 22s
+
+pond | RMSE device (15m,1h,3h) | RMSE reference | max rel diff | bytes up/down (device)
+2 [2.3134 2.8017 3.825 ] [2.3134 2.8017 3.825 ] 8.40e-15 |W diff 9.9e-14 21792 4840
+3 [2.4286 2.8493 3.3641] [2.4286 2.8493 3.3641] 6.23e-16 |W diff 2.2e-14 21274 4840
+4 [4.7208 4.8646 5.1952] [4.7208 4.8646 5.1952] 2.07e-15 |W diff 3.0e-14 21596 4840
+6 [4.7162 4.9971 5.5039] [4.7162 4.9971 5.5039] 4.27e-15 |W diff 5.5e-14 21506 4840
+9 [3.446  4.3864 5.8832] [3.446  4.3864 5.8832] 2.84e-15 |W diff 3.0e-14 21087 4814
+worst relative RMSE difference device vs reference: 8.40e-15

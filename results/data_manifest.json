@@ -1,0 +1,46 @@
+{
+ "IoTpond1.csv": {
+  "sha256": "063ea4f0c9fcd24f016fbfc52e5422b655dfb4f3542d40476d99d899655dda76",
+  "bytes": 6809242
+ },
+ "IoTPond10.csv": {
+  "sha256": "7cd9f8b98a6edf6f2111046f35b19a1304f840c4eaef0b182b5b8922cd601690",
+  "bytes": 45352
+ },
+ "IoTPond11.csv": {
+  "sha256": "70146266d05a99a41bf90f3902b231c81c01af551b216053bc76ffea5299be78",
+  "bytes": 223312
+ },
+ "IoTPond12.csv": {
+  "sha256": "9699eeaf9f5054bc4df034985c4880820ec192c5bd5be0d8247b486eb3e1b5d5",
+  "bytes": 261311
+ },
+ "IoTPond2.csv": {
+  "sha256": "be6b8d9113d2c32d82a6fe8fa51538bcd1085a1034681e8b7f2d67275436eb63",
+  "bytes": 14363675
+ },
+ "IoTPond3.csv": {
+  "sha256": "a1980e80250bfd610274acb3e281ebf93ba2b1e5449c61982bf97d262f8c01be",
+  "bytes": 13993546
+ },
+ "IoTPond4.csv": {
+  "sha256": "ff3822f2e28b191e126d9b92fc6ea6a7be36b1fc5924ac97af1a83f7ec598634",
+  "bytes": 7574192
+ },
+ "IoTPond6.csv": {
+  "sha256": "5da60c205dc569f147ec9f20b285c869884171741316a3b9af052850b68193ed",
+  "bytes": 7581741
+ },
+ "IoTPond7.csv": {
+  "sha256": "8fc3c26241da6ad9bd748c116e06cac00664c0a0d7cfa424fc8453ed5e03bd52",
+  "bytes": 27346535
+ },
+ "IoTPond8.csv": {
+  "sha256": "1260a962f979876a1d451a55208bcd9e7fef077e3d13ccfee98863f6afb128a7",
+  "bytes": 7212522
+ },
+ "IoTPond9.csv": {
+  "sha256": "9e3aea85c8f2b68504548e3ef273a8cb032a2817118d82da4a6b5758e615bf54",
+  "bytes": 15218730
+ }
+}
